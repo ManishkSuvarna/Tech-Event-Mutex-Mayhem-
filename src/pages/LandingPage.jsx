@@ -64,7 +64,7 @@ export default function LandingPage({ onAdminLogin, onContestantLogin }) {
         }}>
           MUTEX
         </h1>
-        <h1 style={{
+        <h2 style={{
           fontFamily: "var(--mm-font)", fontSize: "clamp(36px, 8vw, 96px)",
           fontWeight: 900, letterSpacing: "0.1em", lineHeight: 1,
           background: "linear-gradient(135deg, #ff6b35 0%, #ffd700 100%)",
@@ -72,7 +72,7 @@ export default function LandingPage({ onAdminLogin, onContestantLogin }) {
           backgroundClip: "text", marginBottom: 24,
         }}>
           MAYHEM
-        </h1>
+        </h2>
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 16 }}>
           <div style={{ height: 1, width: 80, background: "linear-gradient(90deg, transparent, var(--mm-accent))" }} />
           <span style={{ fontFamily: "var(--mm-mono)", fontSize: 12, letterSpacing: 4, color: "var(--mm-muted)", textTransform: "uppercase" }}>
@@ -104,6 +104,7 @@ export default function LandingPage({ onAdminLogin, onContestantLogin }) {
               onClick={handlers[p.id]}
               role="button"
               tabIndex={0}
+              aria-label={`Open ${p.title}`}
               onKeyDown={e => e.key === "Enter" && handlers[p.id]()}
               style={{
                 width: 260, background: isHov ? p.activeBg : "var(--mm-surface)",

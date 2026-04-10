@@ -12,8 +12,8 @@ export default function Leaderboard({ teams, isAdmin, onLike, likedTeams }) {
       <div className="lb-row lb-row-header" style={{ fontFamily: "var(--mm-font)", fontSize: 9 }}>
         <span>RANK</span>
         <span>TEAM</span>
-        <span style={{ textAlign: "right" }}>ROUND 1</span>
-        <span style={{ textAlign: "right" }}>ROUND 2</span>
+        <span className="lb-col-r1" style={{ textAlign: "right" }}>ROUND 1</span>
+        <span className="lb-col-r2" style={{ textAlign: "right" }}>ROUND 2</span>
         <span style={{ textAlign: "right" }}>TOTAL</span>
         <span style={{ textAlign: "center" }}>LIKES</span>
       </div>
@@ -57,12 +57,12 @@ export default function Leaderboard({ teams, isAdmin, onLike, likedTeams }) {
             </div>
 
             {/* Round 1 */}
-            <div style={{ textAlign: "right", fontFamily: "var(--mm-font)", fontSize: 13, color: "var(--mm-accent)" }}>
+            <div className="lb-col-r1" style={{ textAlign: "right", fontFamily: "var(--mm-font)", fontSize: 13, color: "var(--mm-accent)" }}>
               {team.round1 || 0}
             </div>
 
             {/* Round 2 */}
-            <div style={{ textAlign: "right", fontFamily: "var(--mm-font)", fontSize: 13, color: "var(--mm-accent3)" }}>
+            <div className="lb-col-r2" style={{ textAlign: "right", fontFamily: "var(--mm-font)", fontSize: 13, color: "var(--mm-accent3)" }}>
               {team.round2 || 0}
             </div>
 

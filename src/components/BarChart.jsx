@@ -1,6 +1,6 @@
 // ─── BarChart.jsx ─────────────────────────────────────────────────────────────
 // Horizontal stacked bar chart: Round 1 + Round 2 per team
-// BUG FIX: removed duplicate `top` CSS property on bar segments
+// BUG FIX: R2 segment now uses `left` only (not conflicting with `inset`)
 import { totalScore, sorted } from "../utils/scoring";
 
 export default function BarChart({ teams }) {
@@ -13,6 +13,8 @@ export default function BarChart({ teams }) {
         const r1    = team.round1 || 0;
         const r2    = team.round2 || 0;
         const total = r1 + r2;
+        const r1Pct = (r1 / maxScore) * 100;
+        const r2Pct = (r2 / maxScore) * 100;
 
         return (
           <div key={team.id} style={{ marginBottom: 10, display: "flex", alignItems: "center", gap: 12 }}>
@@ -27,21 +29,21 @@ export default function BarChart({ teams }) {
 
             {/* Bar container */}
             <div style={{ flex: 1, height: 20, background: "var(--mm-surface2)", position: "relative", overflow: "hidden" }}>
-              {/* Round 1 segment — FIX: single `top` via `inset` shorthand */}
+              {/* Round 1 segment */}
               <div style={{
                 position: "absolute",
-                inset: "20% 0 20% 0",
-                width: `${(r1 / maxScore) * 100}%`,
+                top: "20%", bottom: "20%", left: 0,
+                width: `${r1Pct}%`,
                 background: "var(--mm-accent)",
                 transformOrigin: "left",
                 animation: `bar-anim 0.6s ease ${i * 0.06}s both`,
               }} />
-              {/* Round 2 segment */}
+              {/* Round 2 segment — starts right after R1 */}
               <div style={{
                 position: "absolute",
-                inset: "20% 0 20% 0",
-                left: `${(r1 / maxScore) * 100}%`,
-                width: `${(r2 / maxScore) * 100}%`,
+                top: "20%", bottom: "20%",
+                left: `${r1Pct}%`,
+                width: `${r2Pct}%`,
                 background: "var(--mm-accent3)",
                 transformOrigin: "left",
                 animation: `bar-anim 0.6s ease ${i * 0.06 + 0.1}s both`,

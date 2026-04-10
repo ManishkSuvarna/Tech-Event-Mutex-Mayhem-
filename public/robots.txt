@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://mutex-mayhem.netlify.app/sitemap.xml

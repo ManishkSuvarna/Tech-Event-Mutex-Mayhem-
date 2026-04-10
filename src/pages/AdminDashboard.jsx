@@ -129,7 +129,7 @@ export default function AdminDashboard({ admin, onLogout }) {
 
         {/* ── MANAGE SCORES ────────────────────────────────────────────── */}
         {activeTab === "scores" && (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 16 }}>
+          <div className="dash-grid-2-1">
             {/* Update panel */}
             <div className="mm-card">
               <div className="panel-header">UPDATE SCORES</div>
@@ -184,7 +184,7 @@ export default function AdminDashboard({ admin, onLogout }) {
 
         {/* ── TEAMS ────────────────────────────────────────────────────── */}
         {activeTab === "teams" && (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 2fr", gap: 16 }}>
+          <div className="dash-grid-2-1">
             <div className="mm-card">
               <div className="panel-header">ADD TEAM</div>
               <AddTeamForm
@@ -215,7 +215,7 @@ export default function AdminDashboard({ admin, onLogout }) {
 
         {/* ── TIMER ────────────────────────────────────────────────────── */}
         {activeTab === "timer" && (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <div className="dash-grid-2">
             <div className="mm-card">
               <div className="panel-header">ROUND 1 TIMER</div>
               <Timer label="WEB ROUND" initialSeconds={3600} editable={true} />
@@ -229,7 +229,7 @@ export default function AdminDashboard({ admin, onLogout }) {
 
         {/* ── ANALYTICS ────────────────────────────────────────────────── */}
         {activeTab === "charts" && (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <div className="dash-grid-2">
             <div className="mm-card">
               <div className="panel-header">SCORE DISTRIBUTION — BAR</div>
               <BarChart teams={teams} />

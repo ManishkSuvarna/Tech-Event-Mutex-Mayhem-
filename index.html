@@ -3,14 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Mutex Mayhem — Live Leaderboard Platform for CSE2 Tech Event. Real-time scoring, team management, analytics, and ranked competition tracking." />
-    <meta name="keywords" content="leaderboard, coding competition, tech event, CSE, hackathon, live scoring" />
+
+    <!-- ── Primary SEO ─────────────────────────────────────────────── -->
+    <title>Mutex Mayhem — CSE2 Tech Event Live Leaderboard</title>
+    <meta name="description" content="Mutex Mayhem is the live leaderboard platform for CSE2 Tech Event — real-time scoring, team management, analytics, and ranked competition tracking across two competitive rounds." />
+    <meta name="keywords" content="leaderboard, coding competition, tech event, CSE2, hackathon, live scoring, mutex mayhem, real-time ranking, web development competition" />
     <meta name="author" content="CSE2 Tech Event" />
-    <title>Mutex Mayhem — CSE2 Tech Event</title>
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#040810" />
+
+    <!-- ── Open Graph / Facebook ──────────────────────────────────── -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:title"       content="Mutex Mayhem — CSE2 Tech Event" />
+    <meta property="og:description" content="Live leaderboard platform with real-time scoring, team management, and analytics for CSE2 Tech Event." />
+    <meta property="og:url"         content="https://mutex-mayhem.netlify.app/" />
+    <meta property="og:image"       content="https://mutex-mayhem.netlify.app/og-image.png" />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt"   content="Mutex Mayhem — CSE2 Tech Event Live Leaderboard" />
+    <meta property="og:site_name"   content="Mutex Mayhem" />
+    <meta property="og:locale"      content="en_IN" />
+
+    <!-- ── Twitter Card ───────────────────────────────────────────── -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content="Mutex Mayhem — CSE2 Tech Event" />
+    <meta name="twitter:description" content="Live leaderboard platform with real-time scoring, team management, and analytics." />
+    <meta name="twitter:image"       content="https://mutex-mayhem.netlify.app/og-image.png" />
+    <meta name="twitter:image:alt"   content="Mutex Mayhem Live Leaderboard" />
+
+    <!-- ── Canonical ──────────────────────────────────────────────── -->
+    <link rel="canonical" href="https://mutex-mayhem.netlify.app/" />
+
+    <!-- ── Favicon ────────────────────────────────────────────────── -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon"  href="/favicon.ico" />
+    <link rel="apple-touch-icon"          href="/apple-touch-icon.png" />
+
+    <!-- ── Fonts ──────────────────────────────────────────────────── -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;600&display=swap"
+    />
+
+    <!-- ── JSON-LD Structured Data ────────────────────────────────── -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://mutex-mayhem.netlify.app/#website",
+          "url": "https://mutex-mayhem.netlify.app/",
+          "name": "Mutex Mayhem",
+          "description": "Live leaderboard platform for CSE2 Tech Event with real-time scoring and team analytics.",
+          "publisher": {
+            "@type": "Organization",
+            "name": "CSE2 Tech Event",
+            "url": "https://mutex-mayhem.netlify.app/"
+          }
+        },
+        {
+          "@type": "Event",
+          "@id": "https://mutex-mayhem.netlify.app/#event",
+          "name": "Mutex Mayhem — CSE2 Tech Event",
+          "description": "A two-round coding and web development competition with live leaderboard, real-time scoring, and team analytics.",
+          "eventStatus": "https://schema.org/EventScheduled",
+          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+          "location": {
+            "@type": "Place",
+            "name": "CSE2 Department"
+          },
+          "organizer": {
+            "@type": "Organization",
+            "name": "CSE2 Tech Event Committee",
+            "url": "https://mutex-mayhem.netlify.app/"
+          },
+          "url": "https://mutex-mayhem.netlify.app/",
+          "image": "https://mutex-mayhem.netlify.app/og-image.png"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://mutex-mayhem.netlify.app/#app",
+          "name": "Mutex Mayhem Leaderboard",
+          "applicationCategory": "SportsApplication",
+          "operatingSystem": "Web",
+          "description": "Real-time competition leaderboard system for CSE2 Tech Event featuring live scoring, podium display, team analytics, and admin management.",
+          "url": "https://mutex-mayhem.netlify.app/",
+          "screenshot": "https://mutex-mayhem.netlify.app/og-image.png",
+          "featureList": [
+            "Live Leaderboard",
+            "Real-time Score Updates",
+            "Team Management",
+            "Analytics Dashboard",
+            "Countdown Timers",
+            "Results Publishing"
+          ],
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "INR"
+          }
+        }
+      ]
+    }
+    </script>
   </head>
   <body>
+    <!-- noscript fallback — improves SEO for crawlers that don't run JS -->
+    <noscript>
+      <div style="font-family:sans-serif;padding:40px;text-align:center;background:#040810;color:#e0f0ff;">
+        <h1>Mutex Mayhem — CSE2 Tech Event</h1>
+        <p>Live leaderboard and competition management platform for CSE2 Tech Event.</p>
+        <p>Features: Real-time scoring, team management, analytics, and ranked competition tracking.</p>
+        <p>Please enable JavaScript to use this application.</p>
+      </div>
+    </noscript>
+
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -1,4 +1,6 @@
 /* ─── GLOBAL STYLES — Mutex Mayhem ─────────────────────────────────────────── */
+/* NOTE: Fonts are loaded in index.html via <link> for faster critical path.    */
+/* @import kept as CSS fallback for environments that skip the HTML tag.         */
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@300;400;600&display=swap');
 
 /* ── Reset ──────────────────────────────────────────────────────────────────── */
@@ -26,11 +28,13 @@
 }
 
 /* ── Base ────────────────────────────────────────────────────────────────────── */
+html { scroll-behavior: smooth; }
 body {
   background: var(--mm-bg);
   color: var(--mm-text);
   font-family: var(--mm-mono);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* ── Keyframe Animations ─────────────────────────────────────────────────────── */
@@ -68,6 +72,14 @@ body {
 @keyframes neon-pulse {
   0%,  100% { text-shadow: 0 0 7px  var(--mm-accent), 0 0 10px var(--mm-accent); }
   50%        { text-shadow: 0 0 20px var(--mm-accent), 0 0 40px var(--mm-accent), 0 0 80px rgba(0,212,255,0.5); }
+}
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(60px) scale(0.9); }
+  to   { opacity: 1; transform: translateX(0)    scale(1); }
+}
+@keyframes fade-scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to   { opacity: 1; transform: scale(1); }
 }
 
 /* ── App Shell ───────────────────────────────────────────────────────────────── */
@@ -124,7 +136,7 @@ body {
 .mm-btn-success:hover { background: rgba(0,255,136,0.1); box-shadow: 0 0 16px rgba(0,255,136,0.4); }
 
 .mm-btn-orange  { border-color: var(--mm-accent2); color: var(--mm-accent2); }
-.mm-btn-orange:hover  { background: rgba(255,107,53,0.1); }
+.mm-btn-orange:hover  { background: rgba(255,107,53,0.1); box-shadow: 0 0 16px rgba(255,107,53,0.3); }
 
 /* ── Inputs ──────────────────────────────────────────────────────────────────── */
 .mm-input {
@@ -137,9 +149,12 @@ body {
   width: 100%;
   outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
+  border-radius: 0;       /* keep sharp cyberpunk corners */
 }
 .mm-input:focus { border-color: var(--mm-accent); box-shadow: 0 0 8px rgba(0,212,255,0.2); }
 .mm-input::placeholder { color: var(--mm-muted); }
+.mm-input[type="number"]::-webkit-inner-spin-button,
+.mm-input[type="number"]::-webkit-outer-spin-button { opacity: 0.4; }
 
 .mm-select {
   background: var(--mm-surface2);
@@ -162,6 +177,7 @@ body {
   border: 1px solid var(--mm-border);
   padding: 20px;
   position: relative;
+  animation: fade-scale-in 0.3s ease both;
 }
 .mm-card::before {
   content: '';
@@ -191,7 +207,7 @@ body {
   align-items: center;
   padding: 12px 16px;
   border-bottom: 1px solid rgba(26,58,92,0.5);
-  transition: all 0.3s;
+  transition: background 0.2s;
   cursor: default;
 }
 .lb-row:hover       { background: rgba(0,212,255,0.04); }
@@ -213,6 +229,8 @@ body {
   border-bottom: 1px solid var(--mm-border);
   margin-bottom: 20px;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
 }
 .tab {
   padding: 10px 20px;
@@ -223,8 +241,9 @@ body {
   color: var(--mm-muted);
   border: none; background: none;
   text-transform: uppercase;
-  transition: all 0.2s;
+  transition: color 0.2s;
   border-bottom: 2px solid transparent;
+  white-space: nowrap;
 }
 .tab.active           { color: var(--mm-accent); border-bottom-color: var(--mm-accent); }
 .tab:hover:not(.active) { color: var(--mm-text); }
@@ -235,7 +254,7 @@ body {
   background: rgba(4,8,16,0.9);
   display: flex; align-items: center; justify-content: center;
   z-index: 1000;
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(6px);
 }
 .modal-box {
   background: var(--mm-surface);
@@ -310,6 +329,11 @@ body {
   padding: 16px;
   text-align: center;
   position: relative;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.stat-card:hover {
+  border-color: rgba(0, 212, 255, 0.35);
+  box-shadow: 0 0 12px rgba(0,212,255,0.08);
 }
 
 /* ── Error Banner ────────────────────────────────────────────────────────────── */
@@ -322,12 +346,42 @@ body {
   background: rgba(255,68,68,0.05);
 }
 
+/* ── Dashboard 2-col grids ───────────────────────────────────────────────────── */
+.dash-grid-2-1 { display: grid; grid-template-columns: 1fr 2fr; gap: 16px; }
+.dash-grid-2   { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dash-grid-4   { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+
 /* ── Responsive ──────────────────────────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .dash-grid-2-1 { grid-template-columns: 1fr; }
+  .dash-grid-2   { grid-template-columns: 1fr; }
+
   .lb-row {
-    grid-template-columns: 32px 1fr 60px 60px 70px 50px;
-    padding: 10px 10px;
+    grid-template-columns: 32px 1fr 58px 58px 68px 46px;
+    padding: 10px 8px;
     font-size: 11px;
   }
   .tab { padding: 8px 12px; font-size: 9px; }
+
+  .modal-box { padding: 24px 18px; }
+  .timer-display { font-size: 24px; }
+}
+
+@media (max-width: 600px) {
+  .dash-grid-4 { grid-template-columns: repeat(2, 1fr); }
+
+  .lb-row {
+    /* On very small screens keep it readable — hide round scores, show total */
+    grid-template-columns: 28px 1fr 70px 48px;
+    gap: 6px;
+    padding: 10px 8px;
+  }
+  /* Hide Round 1 and Round 2 columns, keep Rank / Team / Total / Likes */
+  .lb-col-r1, .lb-col-r2 { display: none; }
+
+  .tab { padding: 7px 10px; font-size: 9px; letter-spacing: 1px; }
+}
+
+@media (max-width: 400px) {
+  .dash-grid-4 { grid-template-columns: 1fr 1fr; }
 }

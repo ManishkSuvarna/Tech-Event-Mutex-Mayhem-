@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#040810"/>
+  <!-- Hex border -->
+  <polygon points="32,4 58,18 58,46 32,60 6,46 6,18"
+    fill="none" stroke="#00d4ff" stroke-width="2"/>
+  <!-- M letterform -->
+  <polyline points="14,46 14,20 32,38 50,20 50,46"
+    fill="none" stroke="#00d4ff" stroke-width="4"
+    stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

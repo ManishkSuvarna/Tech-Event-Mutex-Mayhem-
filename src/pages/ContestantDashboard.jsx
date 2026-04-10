@@ -100,7 +100,7 @@ export default function ContestantDashboard({ contestant, onLogout }) {
 
         {/* My Stats Bar */}
         {myTeam && (
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 24 }}>
+          <div className="dash-grid-4" style={{ marginBottom: 24 }}>
             {[
               ["RANK",    `#${myRank}`,            myRank <= 3 ? "var(--mm-gold)"  : "var(--mm-accent)"],
               ["ROUND 1", myTeam.round1 || 0,       "var(--mm-accent)"],
@@ -152,7 +152,7 @@ export default function ContestantDashboard({ contestant, onLogout }) {
         {activeTab === "my-scores" && myTeam && (
           <div className="mm-card">
             <div className="panel-header">YOUR PERFORMANCE</div>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+            <div className="dash-grid-2" style={{ gap: 24 }}>
               {/* Score breakdown */}
               <div>
                 <div style={{ fontFamily: "var(--mm-font)", fontSize: 11, letterSpacing: 2, color: "var(--mm-muted)", marginBottom: 16 }}>
@@ -217,7 +217,7 @@ export default function ContestantDashboard({ contestant, onLogout }) {
 
         {/* ── ANALYTICS ────────────────────────────────────────────────────── */}
         {activeTab === "charts" && (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+          <div className="dash-grid-2">
             <div className="mm-card">
               <div className="panel-header">SCORE COMPARISON</div>
               <BarChart teams={teams} />
