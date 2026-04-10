@@ -1,8 +1,14 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
+// Base URL: /Tech-Event-Mutex-Mayhem-/ on GitHub Pages, / everywhere else
+const base = process.env.GITHUB_ACTIONS
+  ? "/Tech-Event-Mutex-Mayhem-/"
+  : "/";
+
 // https://vitejs.dev/config/
 export default defineConfig({
+  base,
   plugins: [react()],
 
   server: {

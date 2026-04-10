@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
-Sitemap: https://mutex-mayhem.netlify.app/sitemap.xml
+Sitemap: https://manishksuvarna.github.io/Tech-Event-Mutex-Mayhem-/sitemap.xml
+
