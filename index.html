@@ -111,6 +111,46 @@
     </script>
   </head>
   <body>
+    <!-- Critical inline CSS — prevents flash of white before React mounts -->
+    <style>
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      html,body{background:#040810;color:#e0f0ff;font-family:'JetBrains Mono',monospace;min-height:100vh}
+      #root:empty::before{
+        content:'';
+        position:fixed;inset:0;
+        background:radial-gradient(ellipse at 50% 40%,#0a1628 0%,#040810 70%);
+        display:flex;align-items:center;justify-content:center;
+      }
+      #loading-screen{
+        position:fixed;inset:0;background:#040810;
+        display:flex;flex-direction:column;align-items:center;justify-content:center;
+        gap:24px;z-index:9999;
+      }
+      #loading-screen .ls-title{
+        font-family:'Orbitron',monospace;
+        font-size:clamp(24px,5vw,48px);font-weight:900;
+        background:linear-gradient(135deg,#00d4ff,#7c3aed,#ff6b35);
+        -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+        background-clip:text;letter-spacing:0.05em;
+      }
+      #loading-screen .ls-sub{
+        font-size:11px;letter-spacing:4px;color:#5a7a9a;text-transform:uppercase;
+      }
+      #loading-screen .ls-bar{
+        width:200px;height:2px;background:#0d1a2e;overflow:hidden;
+      }
+      #loading-screen .ls-fill{
+        height:100%;width:40%;
+        background:linear-gradient(90deg,#00d4ff,#7c3aed);
+        animation:ls-slide 1.4s ease-in-out infinite;
+      }
+      @keyframes ls-slide{
+        0%{transform:translateX(-100%)}
+        50%{transform:translateX(150%)}
+        100%{transform:translateX(400%)}
+      }
+    </style>
+
     <!-- noscript fallback — improves SEO for crawlers that don't run JS -->
     <noscript>
       <div style="font-family:sans-serif;padding:40px;text-align:center;background:#040810;color:#e0f0ff;">
@@ -121,7 +161,36 @@
       </div>
     </noscript>
 
+    <!-- Loading screen: shown instantly while JS parses & React mounts -->
+    <div id="loading-screen" aria-label="Loading Mutex Mayhem">
+      <div class="ls-title">MUTEX MAYHEM</div>
+      <div class="ls-sub">Initializing live leaderboard&hellip;</div>
+      <div class="ls-bar"><div class="ls-fill"></div></div>
+    </div>
+
     <div id="root"></div>
+
+    <!-- Remove loading screen once React has mounted -->
+    <script>
+      (function() {
+        var ls = document.getElementById('loading-screen');
+        if (!ls) return;
+        // MutationObserver watches for React to populate #root
+        var observer = new MutationObserver(function() {
+          var root = document.getElementById('root');
+          if (root && root.children.length > 0) {
+            ls.style.transition = 'opacity 0.4s ease';
+            ls.style.opacity = '0';
+            setTimeout(function() { ls.remove(); }, 420);
+            observer.disconnect();
+          }
+        });
+        observer.observe(document.getElementById('root'), { childList: true });
+        // Fallback: remove after 5s regardless
+        setTimeout(function() { if (ls.parentNode) ls.remove(); }, 5000);
+      })();
+    </script>
+
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
